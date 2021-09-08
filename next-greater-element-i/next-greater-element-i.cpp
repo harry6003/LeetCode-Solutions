@@ -1,48 +1,51 @@
 class Solution {
 public:
-    
-    
-    
     vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
         
+        stack <int> s;
+        map <int,int> m;
+        vector <int> res(nums1.size(),-1);
         
-        int siz1 = nums1.size();
-        int siz2 = nums2.size();
-        
-        vector <int> ans;
-        int flag = 0;
-        for(int i=0;i<siz1;i++)
+        for(int i=0;i<nums2.size();i++)
         {
-            flag = 0;
-            for(int j=0;j<siz2;j++)
-            {
-                if(nums2[j] == nums1[i])
-                {
-                    for(int k=j+1;k<siz2;k++)
-                    {
-                        if(nums2[k] > nums1[i])
-                        {
-                             ans.push_back(nums2[k]);
-                             flag = 1; 
-                            break;
-                        } 
-                    }
-                }
-                
-               if(flag)
-               {
-                 break;  
-               }
-            }
+            int ele = nums2[i];
             
-            if(!flag)
+            // if( s.empty() == false && ele <= s.top())
+            // {
+            //     s.push(ele);
+            // }
+            // else
+            // {
+            //     while(s.empty() != true)
+            //     {
+            //         m[s.top()] = ele;
+            //         s.pop();
+            //     }
+            // }
+            
+            while(!s.empty() && ele > s.top())
             {
-              ans.push_back(-1);  
+                m[s.top()] = ele;
+                s.pop();
             }
+            s.push(ele);
+            
         }
         
+        for(int i=0;i<nums1.size();i++)
+        {
+            int num = nums1[i];
+            
+            if(m.find(num) != m.end())
+            {
+                int val = m[num];
+                res[i] = val;
+            }
+            
+        }
+        return res;
         
-        return ans;
+        
         
     }
 };
