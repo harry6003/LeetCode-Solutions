@@ -2,36 +2,28 @@ class Solution {
 public:
     vector<int> nextGreaterElements(vector<int>& nums) {
         
-        vector <int> temp;
-        vector <int> ans;
-        int n = nums.size();
-        for(int i=0;i<2*n;i++)
-        {
-            if(i<n)
-                temp.push_back(nums[i]);
-            else
-                temp.push_back(nums[i-n]); 
-        }
+        vector <int> temp(nums);
         
-        for(int i=0;i<n;i++)
+        vector <int> res(nums.size(),-1);
+        
+        for(int i=0;i<nums.size();i++)
+            temp.push_back(nums[i]);
+        
+          // for(int j = 0; j<temp.size();j++)
+          //     cout<<temp[j]<<" ";
+        for(int i=0;i<nums.size();i++)
         {
-            int j;
-            for( j=0;j<2*n;j++)
+            for(int j = i+1; j<temp.size();j++)
             {
-                if(j>i && temp[j] > nums[i] )
+                if(temp[j] > nums[i])
                 {
-                    ans.push_back(temp[j]);
-                    break;
+                     res[i] = temp[j];
+                     break;
                 }
             }
-            
-            if(j == 2*n)
-            {
-                ans.push_back(-1); 
-            }
         }
         
-        return ans;
+         return res;
         
     }
 };
