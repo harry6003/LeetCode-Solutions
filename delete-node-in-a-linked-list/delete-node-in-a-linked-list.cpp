@@ -10,17 +10,11 @@ class Solution {
 public:
     void deleteNode(ListNode* node) {
         
-        ListNode * temp = node;
-        ListNode * prev = node;
-        while(temp ->next != NULL)
-        {
-            temp->val = temp->next->val;
-            prev = temp;
-            temp = temp->next;
-        }
+        ListNode * nextNode = node->next;
         
-        prev->next = NULL;
-        delete temp;
-            
+        node->val = node->next->val;
+        node->next = node->next->next;
+        delete nextNode;
+        
     }
 };
