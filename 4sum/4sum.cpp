@@ -2,7 +2,7 @@ class Solution {
 public:
     vector<vector<int>> fourSum(vector<int>& nums, int target) {
         vector<vector<int>> ans;
-        set <vector<int>> s;
+       
         if(nums.size() < 3)
             return ans;
         
@@ -30,8 +30,7 @@ public:
                                  a.push_back(nums[high]);
                                  a.push_back(nums[i]);
                                  a.push_back(nums[j]);
-                                 sort(a.begin(),a.end());
-                                 s.insert(a);
+                                 ans.push_back(a);
                                 
                                
                                while(low<high && nums[low] == nums[low+1])
@@ -56,8 +55,8 @@ public:
              
             }
         }
-        for(auto it = s.begin();it != s.end();it++)
-            ans.push_back(*it);
+        // for(auto it = s.begin();it != s.end();it++)
+        //     ans.push_back(*it);
         return ans;
     }
 };
