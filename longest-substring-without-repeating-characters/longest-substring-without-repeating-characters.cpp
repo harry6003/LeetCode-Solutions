@@ -6,28 +6,36 @@ public:
             return s.size();
         
         int ans = 0;
-        for(int i=0;i<s.size();i++)
+        int low = 0;
+        int right = 0;
+        vector <int> v(256,-1);
+        
+        while(right < s.size())
         {
-            int count = 1;
-             unordered_map <char,int> m;
-            for(int j=i;j<s.size();j++)
+            if(v[s[right]] != -1)
             {
-               
-                m[s[j]]++;
-               // cout<<m.size()<<endl;
-                if(m.size() != count)
+                while(v[s[right]] != -1)
                 {
-                   if((int)m.size() > ans)
-                       ans = m.size();
-                    count = 1;
-                    break;
+                    v[s[low]] = -1;
+                    low++;
+                    
                 }
-                
-                count++;
             }
-             if((int)m.size() > ans)
-                       ans = m.size();
+          
+                v[s[right]] = right;
+                ans = max(ans,right-low+1);
+            
+            right++;
         }
+        
+        
         return ans;
     }
 };
+
+
+
+
+
+
+
