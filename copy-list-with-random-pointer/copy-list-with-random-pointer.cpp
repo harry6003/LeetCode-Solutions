@@ -23,23 +23,37 @@ public:
    
         
         Node * temp = head;
-        unordered_map <Node *,Node*> m;
-        while(temp != NULL)
+        Node * front = head;
+        while(temp)
         {
+            front = temp->next;
             Node * newNode = new Node(temp->val);
-            m[temp] = newNode;
-            temp = temp->next;
+            temp ->next = newNode;
+            newNode->next = front;
+            temp = front;
         }
-        temp = head;
         
-        while(temp != NULL)
+        temp = head;
+        while(temp)
         {
-            m[temp]->next = m[temp->next];
-            m[temp]->random = m[temp->random];
-            temp = temp ->next ;
+           if(temp->random)
+               temp->next->random = temp->random->next;
+            temp = temp->next->next;
         }
-       
-        return m[head];
+        
+        Node * dummy = new Node(0);
+        Node * tra = dummy;
+        front = head;
+        temp = head;
+        while(temp)
+        {
+            front = front->next->next;
+            tra->next = temp->next;
+            tra = tra->next;
+            temp->next = front;
+            temp = front;
+        }
+        return dummy->next;
         
     }
 };
