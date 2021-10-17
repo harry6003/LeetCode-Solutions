@@ -6,26 +6,24 @@ public:
         if(n <= 2)
             return 0;
         
-        vector <int> lmax(n,0);
-        vector <int> rmax(n,0);
+        int l = 0;
+        int r = n-1;
+        int lmax = 0;
+        int rmax = 0;
         
-       
-        
-        for(int i=1;i<n;i++)
+        while(r>=l)
         {
-            lmax[i] = max(height[i-1],lmax[i-1]);
-        }
-        for(int i = n-2;i>=0;i--)
-        {
-           rmax[i] = max(height[i+1],rmax[i+1]) ;
-        }
-        
-        for(int i=1;i<n-1;i++)
-        {
-            if(height[i] < min(lmax[i] , rmax[i]))
+            if(lmax >= rmax )
             {
-               ans +=  min(lmax[i] , rmax[i]) - height[i];
-            //    cout<<i<<endl;
+                ans += max(0, rmax - height[r]);
+                rmax = max(rmax,height[r]);
+                r--;
+            }
+            else
+            {
+                ans += max(0, lmax - height[l]);
+                lmax = max(lmax,height[l]);
+                l++;
             }
         }
         return ans;
