@@ -13,11 +13,11 @@ public:
             }
             else
             {
-                count = max(count,temp);
                 temp = 0;
             }
+             count = max(count,temp);
         }
-         count = max(count,temp);
+        
         return count;
         
     }
