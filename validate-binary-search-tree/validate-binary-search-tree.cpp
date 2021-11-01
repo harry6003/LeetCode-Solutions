@@ -1,18 +1,13 @@
 class Solution {
 public:
-    bool isValidBST(TreeNode* root) {
-        return isValid(root, NULL, NULL);
-    }
-    
-    bool isValid(TreeNode* root, int* lower, int* upper){
-        if(!root)
-            return true;
+   bool isValidBST(TreeNode* root) {
+    return isValidBST(root, NULL, NULL);
+}
 
-        if(upper && root -> val >= *upper)
-            return false;
-        if(lower && root -> val <= *lower)
-            return false;
-        
-        return isValid(root -> left, lower, &(root -> val)) && isValid(root -> right, &(root -> val), upper);
-    }
+bool isValidBST(TreeNode* root, TreeNode* minNode, TreeNode* maxNode) {
+    if(!root) return true;
+    if(minNode && root->val <= minNode->val || maxNode && root->val >= maxNode->val)
+        return false;
+    return isValidBST(root->left, minNode, root) && isValidBST(root->right, root, maxNode);
+}
 };
