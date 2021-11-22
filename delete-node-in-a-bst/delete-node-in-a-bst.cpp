@@ -57,7 +57,7 @@ public:
         TreeNode * temp = findMini(root->right);
         root->val = temp->val;
         root->right = deleteNode(root->right,temp->val);
-        // delete temp;
+         //delete temp;
         return root;
       }
       return root;
