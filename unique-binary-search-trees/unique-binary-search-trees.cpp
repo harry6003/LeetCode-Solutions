@@ -1,11 +1,21 @@
 class Solution {
 public:
-    int dp[20]{};
     int numTrees(int n) {
-        if(n <= 1) return 1;
-        if(dp[n]) return dp[n];
-        for(int i = 1; i <= n; i++) 
-            dp[n] += numTrees(i-1) * numTrees(n-i);
-        return dp[n];
+      if(n<=2)
+        return n;
+        vector <int> v(n+1);
+      v[0] = 1;
+      v[1] = 1;
+      v[2] = 2;
+      
+      for(int i=3;i<=n;i++)
+      {
+        for(int j=0;j<i;j++)
+        {
+          v[i] += v[j] * v[i-j-1];
+        }
+      }
+      
+      return v[n];
     }
 };
