@@ -5,24 +5,19 @@
  *     ListNode *next;
  *     ListNode() : val(0), next(nullptr) {}
  *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(https://leetcode.com/harry_6003/x), next(next) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
-        
-        ListNode * prev = NULL,*curr = head,*nex = NULL;
-        
-        while(curr)
-        {
-            nex = curr->next;
-            curr->next = prev;
-            prev = curr;
-            curr = nex;
-            
-        }
-        return prev;
-        
+        if(head == NULL || head->next == NULL)
+          return head;
+      
+      ListNode * nextNode = head->next;
+      head->next = NULL;
+      ListNode * res = reverseList(nextNode);
+      nextNode ->next = head;
+      return res;
     }
 };
