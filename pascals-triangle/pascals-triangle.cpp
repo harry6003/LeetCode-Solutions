@@ -15,20 +15,20 @@ public:
             }
             
         }
-      vector <int> a;
-      a.resize(numRows);
-        a[0] = 1;
-      a[numRows-1] =1;
+//       vector <int> a;
+//       a.resize(numRows);
+//         a[0] = 1;
+//       a[numRows-1] =1;
       
-      for(int i=1;i<numRows-1;i++)
-      {
-        a[i] = a[i-1]*(numRows-i);
-        a[i] = a[i] / i;
-      }
+//       for(int i=1;i<numRows-1;i++)
+//       {
+//         a[i] = a[i-1]*(numRows-i);
+//         a[i] = a[i] / i;
+//       }
       
-      for(auto ax:a)
-        cout<<ax<<" ";
-      cout<<endl;
+//       for(auto ax:a)
+//         cout<<ax<<" ";
+//       cout<<endl;
       
 
         
