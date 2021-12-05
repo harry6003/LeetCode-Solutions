@@ -11,55 +11,44 @@
 class Solution {
 public:
     ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
-        
-        if(l1 == NULL)
+        if(l1==NULL)
             return l2;
         if(l2 == NULL)
             return l1;
         
-        ListNode * ans = new ListNode();
-        ListNode * temp = ans;
-        while(l2 != NULL && l1 != NULL)
+        if(l1->val >= l2->val)
         {
-            
-            if(l1->val >= l2->val)
+            ListNode * temp = l1;
+            l1 = l2;
+            l2 = temp;
+        }
+        ListNode * dummy = new ListNode(0);
+        ListNode * temp = dummy;
+        dummy->next = l1;
+        
+        while(l1 !=NULL && l2 != NULL)
+        {
+            while(l1 != NULL && l1->val <= l2->val)
             {
-                ListNode * newNode = new ListNode(l2->val);
-                temp->next = newNode;
-                l2=l2->next;     
+                l1 = l1->next;
+                temp = temp->next;
             }
-            else
+            if(l1 != NULL && l1->val > l2->val)
             {
-                ListNode * newNode = new ListNode(l1->val);
-                temp->next = newNode;
-                l1=l1->next;   
-                
+                temp->next = l2;
+             //   temp = temp->next;
+                ListNode * re  = l2;
+                l2 = l1;
+                l1 = re;
             }
-            temp = temp->next;
+        
         }
         
         if(l1 == NULL)
-        {
-            // while(l2 != NULL)
-            // { 
-            //    ListNode * newNode = new ListNode(l2->val);
-            //     temp->next = newNode;
-            //     l2=l2->next; 
-            // }
             temp->next = l2;
-        }
-        if(l2  == NULL)
-        {
-           // while(l1 != NULL)
-           //  {
-           //     ListNode * newNode = new ListNode(l1->val);
-           //      temp->next = newNode;
-           //      l1=l1->next; 
-           //  } 
+        if(l2 == NULL)
             temp->next = l1;
-        }
         
-        return ans->next;
-      
+        return dummy->next;
     }
 };
