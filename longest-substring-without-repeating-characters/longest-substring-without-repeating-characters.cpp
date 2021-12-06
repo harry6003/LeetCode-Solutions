@@ -14,12 +14,7 @@ public:
         {
             if(v[s[right]] != -1)
             {
-                while(v[s[right]] != -1)
-                {
-                    v[s[low]] = -1;
-                    low++;
-                    
-                }
+               low = max(low,v[s[right]]+1);
             }
           
                 v[s[right]] = right;
