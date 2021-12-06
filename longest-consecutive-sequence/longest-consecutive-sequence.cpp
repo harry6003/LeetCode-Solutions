@@ -5,39 +5,35 @@ public:
         if(nums.size() == 0)
             return 0;
         
-        // sort(nums.begin(),nums.end());
-        map<int,int> m;
-         for(int i=0;i<nums.size();i++)
-            m[nums[i]]++;
-        
-        
-        int maxi = INT_MIN;
+        int max = INT_MIN;
         int count = 1;
-        int counter = m.size();
-         int k = 0;
-        for(auto it = m.begin();k < counter-1; it++)
+        map <int,int> m;
+        for(auto num:nums)
         {
-            int a = it->first;
-            it++;
-            int b = it->first;
-            it--;
-            if(a + 1 == b)
+            m[num]++;
+        }
+        auto it = m.begin();
+        int prev  = it->first;
+        it++;
+        
+        for(;it != m.end();it++)
+        {
+            //cout<<prev<<endl;
+            if( it->first - prev != 1)
             {
-              count++;
+                if(count > max)
+                    max = count;
+                count  = 1;
+                
             }
             else
-            {
-                if(count > maxi)
-                    maxi = count;
-                count = 1;
-            }
-            k++;
+                count++;
+            prev = it->first;
         }
         
-        if(count > maxi)
-                maxi = count;
+        if(count > max)
+            max  = count;
         
-        return maxi;
-        
+        return max;
     }
 };
