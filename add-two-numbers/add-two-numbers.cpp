@@ -10,61 +10,49 @@
  */
 class Solution {
 public:
-    
-//     ListNode * reverse (ListNode * head)
+//     ListNode * reverse(ListNode * l1)
 //     {
-//         if(head == NULL || head -> next == NULL)
-//             return head;
+//         if(!l1 || l1->next == NULL)
+//             return l1;
         
-//         ListNode * remain = reverse(head->next);
-//         head -> next->next  = head;
-//         head->next = NULL;
-//         return remain;
+//         ListNode * nextnode=l1->next;
+//         ListNode * reversed = reverse(l1->next);
+//         l1->next = NULL;
+//         nextnode->next = l1;
+//         return reversed;
 //     }
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        
-        ListNode * res = new ListNode();
-         ListNode * result = res;
+   //     l1 = reverse(l1);
+   //     l2 = reverse(l2);
         int carry = 0;
-        while(l1 != NULL|| l2 != NULL )
+        ListNode * dummy = new ListNode(0);
+        ListNode * temp = dummy;
+        while(l1 != NULL || l2 !=NULL)
         {
-            int sum = 0;
-            if(l2)
-            {
-                sum += l2->val;
-            }
+            int sum = carry;
             if(l1)
-            {
-                sum += l1->val;
-            }
-            sum += carry;
-            carry=0;
-            int value = sum % 10;
-            carry = sum / 10;
+                sum+=l1->val;
+            if(l2)
+                sum+=l2->val;
             
+            int value = sum%10;
+            carry = sum/10;
             ListNode * newNode = new ListNode(value);
-            res->next = newNode;
-            res = res->next;
-        
-            
+            temp->next = newNode;
+            temp = temp->next;
             if(l1)
-                l1=l1->next;
+            l1 = l1->next;
             if(l2)
-                l2 = l2->next;
+            l2 = l2->next;
         }
         
-        if(carry != 0)
+        if(carry)
         {
-            while(carry != 0)
-            {
-            ListNode * newNode = new ListNode(carry%10);
-            res->next = newNode;
-            res = res->next;  
-                carry = carry / 10;
-            }
-          
+            ListNode * newNode = new ListNode(carry);
+            temp->next = newNode;
+            temp = temp->next;
         }
+        return dummy->next;
         
-        return (result->next);
     }
 };
