@@ -10,46 +10,50 @@
  */
 class Solution {
 public:
-    ListNode * reverse (ListNode * head)
+    ListNode * reverse(ListNode * head)
     {
         if(head == NULL || head->next == NULL)
-        {
             return head;
+        ListNode * curr = head;
+        ListNode * pre = NULL;
+        ListNode * nex = NULL;
+        
+        while(curr != NULL)
+        {
+            nex = curr->next;
+            curr->next = pre;
+            pre = curr;
+            curr = nex;
         }
         
-        ListNode * rev = reverse(head->next);
-        head->next->next = head;
-        head->next = NULL;
-        return rev;
-            
+        return pre;
     }
-    
-    
     bool isPalindrome(ListNode* head) {
         
-         ListNode * dumb = new ListNode();
-        dumb->next = head;
-         ListNode * slow = dumb;
-         ListNode * fast = dumb;
-        
-        while(fast != NULL && fast->next != NULL)
+        if(head == NULL || head->next == NULL)
+            return true;
+        ListNode * slow = head;
+        ListNode * fast = head;
+       // cout<<slow->val<<endl;
+        while(fast->next != NULL && fast->next->next != NULL)
         {
-            fast = fast->next->next;
             slow = slow->next;
+            fast = fast->next->next;
         }
-        
-        ListNode * reve = reverse(slow->next);
-        slow->next = reve;
+       // cout<<slow->val<<endl;
+        slow->next = reverse(slow->next);
         slow = slow->next;
-        
-        ListNode * check = head;
-        
+        //cout<<slow->val<<endl;
+        ListNode * start = head;
         while(slow != NULL)
         {
-            if(slow->val != check->val)
+           // cout<<slow->val<<" a "<<endl;
+          //  cout<<start->val<<" d "<<endl;
+            if(slow->val != start->val)
                 return false;
-            slow=slow->next;
-            check = check->next;
+            
+            slow = slow->next;
+            start = start->next;
         }
         return true;
     }
