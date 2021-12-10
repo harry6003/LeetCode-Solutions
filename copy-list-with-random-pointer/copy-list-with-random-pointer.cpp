@@ -18,42 +18,44 @@ class Solution {
 public:
     Node* copyRandomList(Node* head) {
         
-        if(head == NULL)
-            return head;
-   
+        if(head == NULL)return NULL;
         
-        Node * temp = head;
+        Node * it = head;
         Node * front = head;
-        while(temp)
+        
+        while(it != NULL)
         {
-            front = temp->next;
-            Node * newNode = new Node(temp->val);
-            temp ->next = newNode;
+            front = it->next;
+            Node * newNode = new Node(it->val);
+            it->next = newNode;
             newNode->next = front;
-            temp = front;
+            it = front;
         }
         
-        temp = head;
-        while(temp)
+        it = head;
+        front = NULL;
+        while(it != NULL)
         {
-           if(temp->random)
-               temp->next->random = temp->random->next;
-            temp = temp->next->next;
+            if(it->random)
+            {
+                it->next->random = it->random->next;
+            }
+            it = it->next->next;
         }
         
         Node * dummy = new Node(0);
-        Node * tra = dummy;
-        front = head;
-        temp = head;
-        while(temp)
-        {
-            front = front->next->next;
-            tra->next = temp->next;
-            tra = tra->next;
-            temp->next = front;
-            temp = front;
-        }
-        return dummy->next;
+        Node * temp = dummy;
         
+        it = head;
+        while(it != NULL)
+        {
+            front = it->next->next;
+            temp->next = it->next;
+            it->next = front;
+            it = front;
+            temp = temp->next;
+        }
+        
+        return dummy->next;
     }
 };
