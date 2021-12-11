@@ -4,23 +4,23 @@ public:
         
         if(nums.size()<=1)
             return nums.size();
+        int low = 0;
+        int high = 0;
         
-        
-        stack<int> s;
-        for(int i=0;i<nums.size();i++)
+        while(high<nums.size())
         {
-          if(i==0 || s.top() != nums[i])
-          {
-             s.push(nums[i]);
-          }
+            if(nums[low] == nums[high])
+            {
+                high++;
+            }
+            else
+            {
+                low++;
+                nums[low] = nums[high];
+                high++;
+            }
         }
-        int n = s.size();
-        for(int i=s.size()-1;i>=0;i--)
-        {
-            nums[i] =s.top();
-            s.pop();
-        }
-        return n;
+        return low+1;
         
     }
 };
