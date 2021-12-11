@@ -4,41 +4,29 @@ public:
         
         if(height.size()<=2)
             return 0;
-        
-        vector <int> left(height.size());
-        vector <int> right(height.size());
-        int lmaxi = INT_MIN;
-        int rmaxi = INT_MIN;
+        int n = height.size();
+        int l = 0;
+        int r = n-1;
         int ans = 0;
-        for(int i =0 ;i<height.size();i++)
-        {
-            if(height[i]>lmaxi)
-            {
-                lmaxi = height[i];
-            }
-            left[i] = lmaxi;
-         
-        }
-        for(int i = height.size()-1 ;i>=0;i--)
-        {
-            if(height[i]>rmaxi)
-            {
-                rmaxi = height[i];
-            }
-            right[i] = rmaxi;
-        }
+        int lmax = 0;
+        int rmax = 0;
         
-        for(int i=0;i<height.size();i++)
+        while(r>=l)
         {
-            if(right[i]>=height[i] && left[i]>= height[i])
+            if(lmax>=rmax)
             {
-                ans += min(right[i],left[i]) - height[i];
-                cout<<ans<<" "<<i<<endl;
+                ans += max(0,rmax-height[r]);
+                rmax = max(rmax,height[r]);
+                r--;
             }
-           cout<<left[i]<<" "<<right[i]<<endl;
+            else
+            {
+                ans += max(0,lmax-height[l]);
+                lmax = max(lmax,height[l]);
+                l++;
+            }
+            
         }
         return ans;
-            
-        
     }
 };
