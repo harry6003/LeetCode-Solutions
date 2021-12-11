@@ -6,22 +6,21 @@ public:
             return nums.size();
         
         
-        map<int,int> m;
+        stack<int> s;
         for(int i=0;i<nums.size();i++)
         {
-          if(m.count(nums[i]) == 0)
+          if(i==0 || s.top() != nums[i])
           {
-              m[nums[i]] = i;
+             s.push(nums[i]);
           }
         }
-        
-        auto it = m.begin();
-        for(int i=0;i<m.size();i++)
+        int n = s.size();
+        for(int i=s.size()-1;i>=0;i--)
         {
-            nums[i] = it->first;
-            it++;
+            nums[i] =s.top();
+            s.pop();
         }
-        return m.size();
+        return n;
         
     }
 };
