@@ -18,6 +18,6 @@ public:
                 pre = temp;
             }
         }
-        return sz* sz;
+        return sz*sz;
     }
 };
