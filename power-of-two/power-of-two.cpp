@@ -3,7 +3,7 @@ public:
     bool isPowerOfTwo(int n) {
     //    n = abs(n);
         
-        if(n == 0)
+        if(n <= 0)
             return false;
         
         if(n%2 == 0)
