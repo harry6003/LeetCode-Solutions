@@ -4,43 +4,38 @@ public:
         if(prices.size()==0 || k==0)return 0;
         vector<vector<int>> dp(k+1,vector<int> (prices.size()));
         
-        for(int i=0;i<=k;i++)
+        for(int i=1;i<=k;i++)
         {
-            int mini = 0;
-            for(int j=0;j<prices.size();j++)
+            int maxi ;
+            for(int j=1;j<prices.size();j++)
             {
-                if(i==0 || j==0)
+                if(j==1)
                 {
-                    dp[i][j] = 0;
+                    maxi =-1* prices[0];
                 }
-                else
-                {
-                    dp[i][j] = dp[i][j-1];
-                    for(int k = 0;k<j;k++)
-                    {
-                        dp[i][j] = max(dp[i][j],dp[i-1][k] + prices[j] - prices[k] );
-                    }
-                    
-                    // dp[i][j] = max(dp[i][j-1] ,dp[i-1][mini] + prices[j] - prices[mini]);
-                    // if(prices[j]<prices[mini])
+                
+                    // dp[i][j] = dp[i][j-1];
+                    // for(int k = 0;k<j;k++)
                     // {
-                    //     mini = j;
+                    //     dp[i][j] = max(dp[i][j],dp[i-1][k] + prices[j] - prices[k] );
                     // }
-                }
+                    
+                    dp[i][j] = max(dp[i][j-1] ,maxi+prices[j]);
+                    maxi = max(maxi,dp[i-1][j] - prices[j]);
             }
             
             
         }
         
         
-        for(int i=0;i<=k;i++)
-        {
-            for(int j=0;j<prices.size();j++)
-            {
-                cout<<dp[i][j]<<" ";       
-            }
-            cout<<endl;
-        }
+//         for(int i=0;i<=k;i++)
+//         {
+//             for(int j=0;j<prices.size();j++)
+//             {
+//                 cout<<dp[i][j]<<" ";       
+//             }
+//             cout<<endl;
+//         }
         
         return dp[k][prices.size()-1];
     }
