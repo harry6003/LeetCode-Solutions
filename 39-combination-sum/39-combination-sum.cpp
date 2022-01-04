@@ -3,11 +3,10 @@ public:
     
     void helper(vector<int>& candidates, int target,vector<vector<int>>  & ans,int i,int sum,vector<int> & temp)
     {
-      //  cout<<sum<<" "<<i<<endl;
-        if(i>=candidates.size())return;
-        if(i<candidates.size() && sum == target)
+        if(i == candidates.size() )
         {
-            ans.push_back(temp);
+            if(sum == target)
+                ans.push_back(temp);
             return;
         }
          if(sum + candidates[i]<=target)
