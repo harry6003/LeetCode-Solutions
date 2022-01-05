@@ -1,33 +1,44 @@
 class Solution {
 public:
-    vector<vector<string>> partition(string s) {
-        vector<vector<string>> pars;
-        vector<string> par;
-        partition(s, 0, par, pars);
-        return pars;
+    
+   bool isPalindrome(string s, int start, int end) {
+        while(start <= end) {
+            if(s[start++] != s[end--])
+                return false;
+        }
+        return true;
     }
-private: 
-    void partition(string& s, int start, vector<string>& par, vector<vector<string>>& pars) {
-        int n = s.length();
-        if (start == n) {
-            pars.push_back(par);
-        } else {
-            for (int i = start; i < n; i++) {
-                if (isPalindrome(s, start, i)) {
-                    par.push_back(s.substr(start, i - start + 1));
-                    partition(s, i + 1, par, pars);
-                    par.pop_back();
-                }
+    
+    void solve( vector<vector<string>> & ans,vector<string>& temp,int index,string s)
+    {
+        if(index == s.size())
+        {
+            ans.push_back(temp);
+            return;
+        }
+       
+        
+        for(int i=index;i<s.size();i++)
+        {
+              
+            // string g = s.substr(index,i-index);
+            // cout<<index<<" "<<i<<endl;
+            // cout<<"g -> "<<g<<endl;
+            if(isPalindrome(s,index,i))
+            {
+              
+                temp.push_back(s.substr(index, i - index + 1));
+                solve(ans,temp,i+1,s);
+              //  cout<<"RRR"<<endl;
+                temp.pop_back();
             }
         }
     }
     
-    bool isPalindrome(string& s, int l, int r) {
-        while (l < r) {
-            if (s[l++] != s[r--]) {
-                return false;
-            }
-        }
-        return true;
+    vector<vector<string>> partition(string s) {
+        vector<vector<string>> ans;
+        vector<string> temp;
+        solve(ans,temp,0,s);
+        return ans;
     }
 };
