@@ -11,7 +11,7 @@ bool isPossible(int k,int n,int color[],bool graph[101][101], int V)
 {
     for(int i=0;i<V;i++)
     {
-        if(n != i && graph[i][n] == 1 && color[i] == k)
+        if(n != i && graph[n][i] == 1 && color[i] == k)
           return false;
     }
     return true;
