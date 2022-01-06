@@ -63,7 +63,7 @@ class Solution{
         vector<string> ans;
         string a = "";
         solve(ans,0,0,m,n,a);
-        sort(ans.begin(),ans.end());
+     //   sort(ans.begin(),ans.end());
         return ans;
     }
 };
