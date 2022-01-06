@@ -29,6 +29,13 @@ class Solution{
                 solve(ans,row+1,col,m,n,a);
                 a.pop_back();
             }
+             if(col>0 && m[row][col-1] == 1)
+            {
+                a += "L";
+                solve(ans,row,col-1,m,n,a);
+                a.pop_back();
+            }
+           
             if(col < n-1 && m[row][col+1] == 1)
             {
                 a += "R";
@@ -39,12 +46,6 @@ class Solution{
             {
                 a += "U";
                 solve(ans,row-1,col,m,n,a);
-                a.pop_back();
-            }
-            if(col>0 && m[row][col-1] == 1)
-            {
-                a += "L";
-                solve(ans,row,col-1,m,n,a);
                 a.pop_back();
             }
            
