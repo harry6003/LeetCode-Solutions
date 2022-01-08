@@ -1,51 +1,53 @@
 class Solution {
 public:
-    int totalSubarrayForSumK(vector<int> & nums,int mid)
-    {
-        int k = 0;
-       int sum = 0;
-        for(int i=0;i<nums.size();i++)
-        {
-            if(sum+nums[i] > mid)
-            {
-                k++;
-                sum  = 0;
-            }
-            sum += nums[i];
-        }
-        if(sum > 0)
-            k++;
-        return k;
+    int minimumSubarraysRequired(vector<int>& nums, int maxSumAllowed) {
+        int currentSum = 0;
+        int splitsRequired = 0;
         
+        for (int element : nums) {
+            // Add element only if the sum doesn't exceed maxSumAllowed
+            if (currentSum + element <= maxSumAllowed) {
+                currentSum += element;
+            } else {
+                // If the element addition makes sum more than maxSumAllowed
+                // Increment the splits required and reset sum
+                currentSum = element;
+                splitsRequired++;
+            }
+        }
+        
+        // Return the number of subarrays, which is the number of splits + 1
+        return splitsRequired + 1;
     }
     
     int splitArray(vector<int>& nums, int m) {
+        // Find the sum of all elements and the maximum element
+        int sum = 0;
+        int maxElement = INT_MIN;
+        for (int element : nums) {
+            sum += element;
+            maxElement = max(maxElement, element);
+        }
         
-        int low = 0;
-        int high = 0;
-        
-        for(int i=0;i<nums.size();i++)
-        {
-            low = max(low,nums[i]);
-            high = high + nums[i];
-        }      
-        
-        while(low<high)
-        {
-            int mid = low + (high-low)/2;
+        // Define the left and right boundary of binary search
+        int left = maxElement;
+        int right = sum;
+        int minimumLargestSplitSum = 0;
+        while (left <= right) {
+            // Find the mid value
+            int maxSumAllowed = (left + right) / 2;
             
-            int a = totalSubarrayForSumK(nums,mid);
-          //  cout<<a<<" "<<mid<<endl;
-            if(a <= m)
-            {
-                high = mid;
-            }
-            else if(a > m)
-            {
-               low = mid+1;
+            // Find the minimum splits. If splitsRequired is less than
+            // or equal to m move towards left i.e., smaller values
+            if (minimumSubarraysRequired(nums, maxSumAllowed) <= m) {
+                right = maxSumAllowed - 1;
+                minimumLargestSplitSum = maxSumAllowed;
+            } else {
+                // Move towards right if splitsRequired is more than m
+                left = maxSumAllowed + 1;
             }
         }
-        return low;
         
+        return minimumLargestSplitSum;
     }
 };
