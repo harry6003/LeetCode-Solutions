@@ -21,15 +21,13 @@ public:
                     low = mid+1;
                 }
             }
-            else if(nums[mid]<nums[low] )
+            else 
             {
                 if(target >= nums[mid] && target <= nums[high] )
                     low = mid+1;
                 else
                     high = mid-1;
             }
-            else
-                return -1;
         }
         return -1;
         
