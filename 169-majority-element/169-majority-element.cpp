@@ -10,7 +10,7 @@ public:
             {
                 freq++;
             }
-            if(freq == 0)
+            else if(freq == 0)
             {
                 curr = nums[i];
                 freq++;
