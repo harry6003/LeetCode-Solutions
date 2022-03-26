@@ -6,6 +6,10 @@ public:
         
         for(int i=0;i<nums.size();i++)
         {
+            if(curr == nums[i])
+            {
+                freq++;
+            }
             if(freq == 0)
             {
                 curr = nums[i];
@@ -15,10 +19,7 @@ public:
             {
                 freq--;
             }
-            else if(curr == nums[i])
-            {
-                freq++;
-            }
+            
         }
         return curr;
         
