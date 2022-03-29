@@ -4,24 +4,21 @@ public:
         
         int zero = 0;
         int one = 0;
-        int two = nums.size()-1;
+        int two = 0;
         
-        while(one<=two)
+        for(int i=0;i<nums.size();i++)
         {
-            switch(nums[one])
-            {
-                case 0:
-                    swap(nums[zero++],nums[one++]);
-                    break;
-                case 1:
-                    one++;
-                     break;
-                case 2:
-                    swap(nums[one],nums[two--]);
-                     break;
-            }
+            if(nums[i]==0)zero++;
+            else if(nums[i]==1)one++;
+            else two++;
         }
-        
+        int i = 0;
+        while(zero--)
+            nums[i++] = 0;
+         while(one--)
+            nums[i++] = 1;
+         while(two--)
+            nums[i++] = 2;
         
     }
 };
