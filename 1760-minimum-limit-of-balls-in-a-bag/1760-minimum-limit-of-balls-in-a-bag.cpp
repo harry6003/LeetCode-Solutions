@@ -7,8 +7,7 @@ public:
         
         for(int i=0;i<nums.size();i++)
         {
-            count += nums[i]/mid;
-            if(nums[i]%mid == 0)count--;
+            count += ((nums[i] - 1 )/mid);
         }
         
         if(maxOperations >= count)
