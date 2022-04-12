@@ -59,6 +59,10 @@ bool search(Node* root, int x) {
     // Your code here
     if(!root)return false;
     if(root->data == x)return true;
-    
-    return search(root->right,x) || search(root->left,x);
+    if(x > root->data)
+    {
+        return search(root->right,x);
+    }
+    else
+        return search(root->left,x);
 }
