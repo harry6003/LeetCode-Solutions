@@ -8,11 +8,8 @@ public:
         for(int i=0;i<nums.size();i++)
         {
             sum += nums[i];
-            
             maxi = max(sum,maxi);
-            
-            if(sum < 0)
-                sum = 0;
+            sum = max(0,sum);
         }
         return maxi;
     }
