@@ -1,27 +1,21 @@
 class Solution {
 public:
     int majorityElement(vector<int>& nums) {
-        int freq = 0;
-        int curr = 0;
         
-        for(int i=0;i<nums.size();i++)
+        int count = 1;
+        int major = nums[0];
+            
+        for(int i=1;i<nums.size();i++)
         {
-            if(curr == nums[i])
-            {
-                freq++;
-            }
-            else if(freq == 0)
-            {
-                curr = nums[i];
-                freq++;
-            }
-            else if(curr != nums[i])
-            {
-                freq--;
-            }
+            
+            if(nums[i] == major)
+                count++;
+            else if(count == 0)
+                 major = nums[i];
+            else if(nums[i] != major)
+               count--;
             
         }
-        return curr;
-        
+        return major;
     }
 };
