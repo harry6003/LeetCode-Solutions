@@ -1,45 +1,37 @@
 class Solution {
 public:
     vector<int> spiralOrder(vector<vector<int>>& matrix) {
-        int n = matrix.size();
-        int m = matrix[0].size();
-        
-        int left = 0,right = m-1;
-        int top = 0,bottom = n-1;
-        int direction = 1;
-        vector<int> ans;
-        while(left<=right && top<=bottom)
-        {
-            if(direction == 1)
-            {
-                for(int i = left;i<=right;i++)
-                    ans.push_back(matrix[top][i]);
-                top++;
-                direction = 2;
+        int m = matrix.size();
+        int n = matrix[0].size();
+        int u = 0, d = m - 1, l = 0, r = n - 1, p = 0;
+        vector<int> order(m * n);
+        while (u <= d && l <= r) {
+            for (int col = l; col <= r; col++) {
+                order[p++] = matrix[u][col];
             }
-            else if(direction == 2)
-            {
-                for(int i=top ;i<=bottom ;i++)
-                    ans.push_back(matrix[i][right]);
-                right--;
-                direction = 3;
+            if (++u > d) {
+                break;
             }
-            else if(direction == 3)
-            {
-                for(int i=right;i>=left;i--)
-                    ans.push_back(matrix[bottom][i]);
-                bottom--;
-                direction = 4;
+            for (int row = u; row <= d; row++) {
+                order[p++] = matrix[row][r];
             }
-            else if(direction == 4)
-            {
-                for(int i=bottom ;i>=top;i--)
-                    ans.push_back(matrix[i][left]);
-                left++;
-                direction = 1 ;
+            if (--r < l) {
+                break;
             }
-            
+            for (int col = r; col >= l; col--) {
+                order[p++] = matrix[d][col];
+            }
+            if (--d < u) {
+                break;
+            }
+            for (int row = d; row >= u; row--) {
+                order[p++] = matrix[row][l];
+            }
+            if (l++ > r) {
+                break;
+            }
         }
-        return ans;
+         //order.push_back(1);
+        return order;
     }
 };
