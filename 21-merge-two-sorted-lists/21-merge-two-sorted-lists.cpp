@@ -20,20 +20,19 @@ public:
         
         while(list1 && list2)
         {
+            ListNode * newNode = new ListNode;
             if(list1->val <= list2->val)
             {
-                ListNode * newNode = new ListNode(list1->val);
-                head->next = newNode;
-                head = head->next;
+                newNode->val = list1->val;
                 list1 = list1->next;
             }
             else
             {
-                ListNode * newNode = new ListNode(list2->val);
-                head->next = newNode;
-                head = head->next;
+                newNode->val = list2->val;
                 list2 = list2->next;
             }   
+            head->next = newNode;
+            head = head->next;
         }
         
         if(list1)
