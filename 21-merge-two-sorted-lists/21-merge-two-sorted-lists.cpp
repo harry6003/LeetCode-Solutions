@@ -15,47 +15,32 @@ public:
         if(list1 == NULL)return list2;
         if(list2 == NULL)return list1;
         
-        ListNode * dummy = new ListNode(0);
+        ListNode * dummy  = new ListNode;
         ListNode * head = dummy;
         
         while(list1 && list2)
         {
-            ListNode * newNode = new ListNode;
             if(list1->val <= list2->val)
             {
-                newNode->val = list1->val;
+                head->next = list1;
                 list1 = list1->next;
             }
             else
             {
-                newNode->val = list2->val;
+                head->next = list2;
                 list2 = list2->next;
-            }   
-            head->next = newNode;
+            }
             head = head->next;
         }
         
         if(list1)
         {
-            while(list1)
-            {
-                ListNode * newNode = new ListNode(list1->val);
-                head->next = newNode;
-                head = head->next;
-                list1 = list1->next;
-            }
+            head->next = list1;
         }
         if(list2)
         {
-            while(list2)
-            {
-                ListNode * newNode = new ListNode(list2->val);
-                head->next = newNode;
-                head = head->next;
-                list2 = list2->next;
-            }
+            head->next = list2;
         }
-        
         return dummy->next;
     }
 };
