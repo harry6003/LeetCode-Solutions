@@ -5,7 +5,8 @@ public:
         string tmp_sorted;
         
         for (auto word : strs) {
-            tmp_sorted = countSort(word);
+            tmp_sorted = word;
+            sort(tmp_sorted.begin(), tmp_sorted.end());
             m[tmp_sorted].push_back(word);
         }
         
@@ -14,15 +15,6 @@ public:
             res.push_back(list);
         }
         
-        return res;
-    }
-    
-    string countSort(string word) {
-        vector<int> count(26);
-        string res;
-        
-        for (auto ch : word) count[ch - 'a']++;
-        for (int i = 0; i < 26; i++) res += string(count[i], i+'a');
         return res;
     }
 };
