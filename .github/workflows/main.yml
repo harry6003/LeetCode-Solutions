@@ -24,22 +24,45 @@ jobs:
         python-version: '3.x'
     
     - name: Extract and link Jira tickets
+      id: link_tickets
       run: |
         python3 link_tickets.py "${{ github.event.pull_request.body }}"
-      id: link_tickets
-      
-    - name: Update PR description
-      uses: peter-evans/create-pull-request@v3
-      with:
-        commit-message: "Link Jira Tickets"
-        title: "Link Jira Tickets"
-        body: ${{ steps.link_tickets.outputs.jira_tickets }}
-        token: ${{ secrets.GITHUB_TOKEN }}
-        base: main
+        echo "::set-output name=jira_tickets::$(cat link_tickets_output.txt)"
+    
+    - name: Get current PR description
+      id: get_description
+      run: |
+        PR_NUMBER=${{ github.event.number }}
+        DESCRIPTION=$(curl -s \
+          -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          -H "Accept: application/vnd.github.v3+json" \
+          https://api.github.com/repos/${{ github.repository }}/pulls/${PR_NUMBER} | jq -r '.body')
+        echo "::set-output name=description::${DESCRIPTION}"
+      shell: bash
+    
+    - name: Merge existing description with Jira tickets
+      id: merge_description
+      run: |
+        JIRA_TICKETS="${{ steps.link_tickets.outputs.jira_tickets }}"
+        DESCRIPTION="${{ steps.get_description.outputs.description }}"
+        
+        if [[ -z "${DESCRIPTION}" ]]; then
+          echo "${JIRA_TICKETS}" > new_description.txt
+        else
+          echo "${DESCRIPTION}" > new_description.txt
+          echo -e "\n\n${JIRA_TICKETS}" >> new_description.txt
+        fi
+        echo "::set-output name=new_description::$(cat new_description.txt)"
+      shell: bash
+    
     - name: Update PR description
       run: |
+        PR_NUMBER=${{ github.event.number }}
+        NEW_DESCRIPTION="${{ steps.merge_description.outputs.new_description }}"
+        
         curl -X PATCH \
           -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
           -H "Accept: application/vnd.github.v3+json" \
-          https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.number }} \
-          -d '{"body": "${{ steps.link_tickets.outputs.jira_tickets }}" }'
+          -H "Content-Type: application/json" \
+          https://api.github.com/repos/${{ github.repository }}/pulls/${PR_NUMBER} \
+          -d "{\"body\": \"${NEW_DESCRIPTION}\"}"
