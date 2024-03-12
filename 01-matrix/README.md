@@ -1,6 +1,6 @@
 <h2>542. 01 Matrix</h2><h3>Medium</h3><hr><div><p>Given an <code>m x n</code> binary matrix <code>mat</code>, return <em>the distance of the nearest </em><code>0</code><em> for each cell</em>.</p>
 
-<p>The distance between two adjacent cells is <code>1</code>.</p>
+<p>The distance between two adjacent cells is  <code>1</code>.</p>
 
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
