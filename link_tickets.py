@@ -1,4 +1,5 @@
 import re
+import sys
 
 def extract_ticket_ids(pr_description):
     # Regular expression pattern to find Jira ticket IDs
