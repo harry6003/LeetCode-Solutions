@@ -11,7 +11,7 @@
 
 <p><strong>Example 2:</strong></p>
 <img alt="" src="https://assets.leetcode.com/uploads/2021/04/24/01-2-grid.jpg" style="width: 253px; height: 253px;">
-<pre><strong>Input:</strong> mat = [[0,0,0],[0,1,0],[1,1,1]]
+<pre><strong>Input:</strong> mat = [[0,0,0],[0,1,1,0],[1,1,1]]
 <strong>Output:</strong> [[0,0,0],[0,1,0],[1,2,1]]
 </pre>
 
