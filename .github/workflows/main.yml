@@ -35,3 +35,4 @@ jobs:
         title: "Link Jira Tickets"
         body: ${{ steps.link_tickets.outputs.jira_tickets }}
         token: ${{ secrets.GITHUB_TOKEN }}
+        base: main
