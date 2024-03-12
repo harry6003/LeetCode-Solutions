@@ -19,4 +19,13 @@ jobs:
     
     - name: Extract and link Jira tickets
       run: |
-        python3 link_tickets.py ${{ github.event.pull_request.body }}
+        python3 link_tickets.py "${{ github.event.pull_request.body }}"
+      id: link_tickets
+      
+    - name: Update PR description
+      uses: peter-evans/create-pull-request@v3
+      with:
+        commit-message: "Link Jira Tickets"
+        title: "Link Jira Tickets"
+        body: ${{ steps.link_tickets.outputs.jira_tickets }}
+        token: ${{ secrets.GITHUB_TOKEN }}
