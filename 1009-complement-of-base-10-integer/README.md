@@ -1,7 +1,7 @@
 <h2><a href="https://leetcode.com/problems/complement-of-base-10-integer/">1009. Complement of Base 10 Integer</a></h2><h3>Easy</h3><hr><div><p>The <strong>complement</strong> of an integer is the integer you get when you flip all the <code>0</code>'s to <code>1</code>'s and all the <code>1</code>'s to <code>0</code>'s in its binary representation.</p>
 
 <ul>
-	<li>For example, The integer <code>5</code> is <code>"101"</code> in binary and its <strong>complement</strong> is <code>"010"</code> which is the integer <code>2</code>.</li>
+	<li>For example, The integer  <code>5</code> is <code>"101"</code> in binary and its <strong>complement</strong> is <code>"010"</code> which is the integer <code>2</code>.</li>
 </ul>
 
 <p>Given an integer <code>n</code>, return <em>its complement</em>.</p>
