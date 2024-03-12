@@ -1,0 +1,22 @@
+name: Link Jira Tickets
+
+on:
+  pull_request:
+    types: [opened, edited]
+
+jobs:
+  link_tickets:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      
+    - name: Install Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+    
+    - name: Extract and link Jira tickets
+      run: |
+        python3 link_tickets.py ${{ github.event.pull_request.body }}
