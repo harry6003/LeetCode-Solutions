@@ -13,7 +13,7 @@ S = 101
 </strong>010
 <strong>Explanation:
 </strong>We get the output by converting 1's in S
-to 0 and 0s to 1</span><strong>
+to 0 and 0s  to 1</span><strong>
 </strong></pre>
 
 <p><strong><span style="font-size:18px">Example 2:</span></strong></p>
